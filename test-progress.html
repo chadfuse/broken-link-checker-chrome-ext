@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+.test-container {
+  width: 280px;
+  padding: 12px;
+  background: #1a1a1a;
+  color: #e5e5e5;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.scan-progress {
+  display: block;
+  margin: 12px 0;
+  padding: 12px;
+  background: #2d2d2d;
+  border-radius: 8px;
+  border: 1px solid #374151;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.progress-status {
+  font-size: 11px;
+  font-weight: 600;
+  color: #e5e5e5;
+}
+
+.progress-current {
+  font-size: 9px;
+  color: #9ca3af;
+  margin-bottom: 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.progress-bar-wrapper {
+  width: 100%;
+  height: 8px;
+  background: #374151;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 6px;
+}
+
+.progress-bar {
+  width: 45%;
+  height: 100%;
+  background: #4969f9;
+  transition: width .3s ease;
+  border-radius: 12px;
+}
+</style>
+</head>
+<body>
+<div class="test-container">
+  <h3>Progress Bar Test</h3>
+  
+  <div class="scan-progress">
+    <div class="progress-header">
+      <span class="progress-status">Scanning links...</span>
+      <span>45%</span>
+    </div>
+    <div class="progress-current">https://example.com/current-page</div>
+    <div class="progress-bar-wrapper">
+      <div class="progress-bar"></div>
+    </div>
+  </div>
+  
+  <p>If you can see the blue progress bar above, it's working correctly!</p>
+</div>
+</body>
+</html>
