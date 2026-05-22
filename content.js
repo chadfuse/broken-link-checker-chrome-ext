@@ -254,9 +254,9 @@ function getSelectorsToScan() {
     }
   }
 
-  // If no sections are selected, return empty selector to scan nothing
+  // If no sections detected, fall back to scanning the entire page
   if (selectors.length === 0) {
-    return '.blh-no-scan'; // Non-existent class
+    return 'body';
   }
 
   return selectors.join(', ');
@@ -306,15 +306,9 @@ function isLinkInIncludedSection(link) {
   }
 
   const selectors = getSelectorsToScan();
-  
-  // If no selectors selected, exclude all links
-  if (selectors === '.blh-no-scan') {
-    return false;
-  }
-
   const includedElements = document.querySelectorAll(selectors);
-  
-  return Array.from(includedElements).some(element => 
+
+  return Array.from(includedElements).some(element =>
     element.contains(link) || element === link
   );
 }
@@ -364,19 +358,12 @@ async function startScan() {
   const allLinks = [...document.querySelectorAll('a[href]')];
   console.log('Broken Link Highlighter: Found total links:', allLinks.length);
   
-  // Debug the specific EPA link
-  debugSpecificLink('https://www.epa.gov/ozone-layer-protection');
-  
   const links = allLinks.filter(link => {
     const href = link.href;
     if (!href || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) {
       return false;
     }
-    const included = isLinkInIncludedSection(link);
-    if (!included) {
-      console.log('Broken Link Highlighter: Link excluded:', link.href, link);
-    }
-    return included;
+    return isLinkInIncludedSection(link);
   });
 
   console.log('Broken Link Highlighter: Links to scan:', links.length);
